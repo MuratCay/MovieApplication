@@ -1,4 +1,4 @@
-package com.hardcoder.movieapp.core
+package com.hardcoder.movieapp.core.base
 
 import android.os.Bundle
 import android.view.LayoutInflater
