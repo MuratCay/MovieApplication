@@ -11,13 +11,13 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hardcoder.movieapp.R
-import com.hardcoder.movieapp.core.BaseFragment
+import com.hardcoder.movieapp.core.base.BaseFragment
 import com.hardcoder.movieapp.databinding.FragmentSignInBinding
 import com.hardcoder.movieapp.utils.DeviceUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
+class SignInFragment : BaseFragment<FragmentSignInBinding>() {
 
     private val viewModel by viewModels<SignInViewModel>()
 
@@ -65,4 +65,6 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding
             DeviceUtils.closeKeyboard(requireActivity())
         }
     }
+
+    override fun getFragmentView() = R.layout.fragment_sign_in
 }

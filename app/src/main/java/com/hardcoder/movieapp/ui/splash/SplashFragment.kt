@@ -1,19 +1,18 @@
 package com.hardcoder.movieapp.ui.splash
 
-import android.animation.Animator
 import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hardcoder.movieapp.R
-import com.hardcoder.movieapp.core.BaseFragment
+import com.hardcoder.movieapp.core.base.BaseFragment
 import com.hardcoder.movieapp.databinding.FragmentSplashBinding
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding::inflate) {
+class SplashFragment : BaseFragment<FragmentSplashBinding>() {
 
     private val viewModel by viewModels<SplashViewModel>()
 
@@ -35,5 +34,7 @@ class SplashFragment : BaseFragment<FragmentSplashBinding>(FragmentSplashBinding
             }
         }
     }
+
+    override fun getFragmentView() = R.layout.fragment_splash
 
 }

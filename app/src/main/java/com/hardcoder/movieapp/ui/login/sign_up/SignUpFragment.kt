@@ -6,30 +6,18 @@ import android.text.SpannableString
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
-import android.view.LayoutInflater
 import android.view.View
-import android.view.ViewGroup
 import androidx.core.content.ContextCompat
-import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hardcoder.movieapp.R
+import com.hardcoder.movieapp.core.base.BaseFragment
 import com.hardcoder.movieapp.databinding.FragmentSignUpBinding
 import com.hardcoder.movieapp.utils.DeviceUtils
 
-class SignUpFragment : Fragment() {
+class SignUpFragment : BaseFragment<FragmentSignUpBinding>() {
 
-    lateinit var binding: FragmentSignUpBinding
     val viewModel by viewModels<SignUpViewModel>()
-
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View {
-        binding = FragmentSignUpBinding.inflate(layoutInflater)
-        return binding.root
-    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -76,4 +64,6 @@ class SignUpFragment : Fragment() {
             DeviceUtils.closeKeyboard(requireActivity())
         }
     }
+
+    override fun getFragmentView() = R.layout.fragment_sign_up
 }

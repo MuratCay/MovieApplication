@@ -1,13 +1,22 @@
 package com.hardcoder.movieapp.ui.home
 
+import android.os.Bundle
+import android.view.View
 import androidx.fragment.app.viewModels
-import com.hardcoder.movieapp.core.BaseFragment
+import com.hardcoder.movieapp.R
+import com.hardcoder.movieapp.core.base.BaseFragment
 import com.hardcoder.movieapp.databinding.FragmentHomeBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class HomeFragment : BaseFragment<FragmentHomeBinding>(FragmentHomeBinding::inflate) {
+class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     private val viewModel by viewModels<HomeViewModel>()
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun getFragmentView() = R.layout.fragment_home
 
 }

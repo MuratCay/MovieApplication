@@ -10,4 +10,7 @@
     <string name="string_sign_up">Sign Up</string>
     <string name="sign_in_text">Already have an account? Log in.</string>
     <string name="string_sign_in">Log in.</string>
+    <string name="home_page">Anasayfa</string>
+    <string name="favori">Favori</string>
+    <string name="settings">Ayarlar</string>
 </resources>
