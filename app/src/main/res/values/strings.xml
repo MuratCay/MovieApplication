@@ -2,4 +2,10 @@
     <string name="app_name">MovieApp</string>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="login">Log in</string>
+    <string name="login_description">Log in if you have created account before.</string>
+    <string name="string_email">Email</string>
+    <string name="string_password">Password</string>
+    <string name="sign_up_text">Don\'t have an account. Sign Up</string>
+    <string name="string_sign_up">Sign Up</string>
 </resources>
