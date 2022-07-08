@@ -2,6 +2,7 @@ package com.hardcoder.movieapp.di
 
 import android.content.Context
 import com.hardcoder.movieapp.BuildConfig
+import com.hardcoder.movieapp.data.service.MovieService
 import com.hardcoder.movieapp.utils.Constants.BASE_URL
 import com.hardcoder.movieapp.utils.Constants.CONNECT_TIMEOUT
 import com.hardcoder.movieapp.utils.Constants.READ_TIMEOUT
@@ -68,5 +69,11 @@ object NetworkModule {
             .addConverterFactory(moshiConverterFactory)
             .client(okHttpClient)
             .build()
+    }
+
+    @Provides
+    @Singleton
+    fun provideApiService(retrofit: Retrofit): MovieService {
+        return retrofit.create(MovieService::class.java)
     }
 }
