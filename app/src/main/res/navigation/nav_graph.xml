@@ -12,20 +12,24 @@
         tools:layout="@layout/fragment_splash">
         <action
             android:id="@+id/action_splashFragment_to_loginFragment"
-            app:destination="@id/loginFragment" />
+            app:destination="@id/signInFragment" />
     </fragment>
     <fragment
-        android:id="@+id/loginFragment"
-        android:name="com.hardcoder.movieapp.ui.login.sign_in.LoginFragment"
+        android:id="@+id/signInFragment"
+        android:name="com.hardcoder.movieapp.ui.login.sign_in.SignInFragment"
         android:label="fragment_login"
-        tools:layout="@layout/fragment_login">
+        tools:layout="@layout/fragment_sign_in">
         <action
-            android:id="@+id/action_loginFragment_to_signUpFragment"
+            android:id="@+id/action_SignInFragment_to_signUpFragment"
             app:destination="@id/signUpFragment" />
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
         android:name="com.hardcoder.movieapp.ui.login.sign_up.SignUpFragment"
         android:label="fragment_sign_up"
-        tools:layout="@layout/fragment_sign_up" />
+        tools:layout="@layout/fragment_sign_up">
+        <action
+            android:id="@+id/action_signUpFragment_to_signInFragment"
+            app:destination="@id/signInFragment" />
+    </fragment>
 </navigation>

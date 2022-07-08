@@ -8,4 +8,6 @@
     <string name="string_password">Password</string>
     <string name="sign_up_text">Don\'t have an account. Sign Up</string>
     <string name="string_sign_up">Sign Up</string>
+    <string name="sign_in_text">Already have an account? Log in.</string>
+    <string name="string_sign_in">Log in.</string>
 </resources>

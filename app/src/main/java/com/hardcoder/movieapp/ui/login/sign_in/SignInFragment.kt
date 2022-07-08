@@ -12,21 +12,21 @@ import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.hardcoder.movieapp.R
 import com.hardcoder.movieapp.core.BaseFragment
-import com.hardcoder.movieapp.databinding.FragmentLoginBinding
+import com.hardcoder.movieapp.databinding.FragmentSignInBinding
 import com.hardcoder.movieapp.utils.DeviceUtils
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
-class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::inflate) {
+class SignInFragment : BaseFragment<FragmentSignInBinding>(FragmentSignInBinding::inflate) {
 
-    private val viewModel by viewModels<LoginViewModel>()
+    private val viewModel by viewModels<SignInViewModel>()
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         spanSignUpText()
         requestToEditText()
+        closeKeyboard()
     }
-
 
     private fun spanSignUpText() {
         val signUpSpanText = SpannableString(getString(R.string.sign_up_text))
@@ -52,11 +52,17 @@ class LoginFragment : BaseFragment<FragmentLoginBinding>(FragmentLoginBinding::i
     }
 
     private fun navigateToFlow() {
-        findNavController().navigate(R.id.action_loginFragment_to_signUpFragment)
+        findNavController().navigate(R.id.action_SignInFragment_to_signUpFragment)
     }
 
     private fun requestToEditText() {
         binding.etEmailField.requestFocus()
         DeviceUtils.openKeyboard(requireActivity(), binding.etEmailField)
+    }
+
+    private fun closeKeyboard() {
+        binding.root.setOnClickListener {
+            DeviceUtils.closeKeyboard(requireActivity())
+        }
     }
 }

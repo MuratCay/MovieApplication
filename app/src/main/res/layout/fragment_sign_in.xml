@@ -15,7 +15,7 @@
         android:layout_height="match_parent"
         android:background="@color/onyx"
         android:paddingHorizontal="20dp"
-        tools:context=".ui.login.sign_in.LoginFragment">
+        tools:context=".ui.login.sign_in.SignInFragment">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/cl_login_header"
@@ -34,21 +34,6 @@
                 app:layout_constraintEnd_toStartOf="@+id/tv_login_header"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
-
-                <androidx.appcompat.widget.AppCompatImageButton
-                    android:id="@+id/btn_login_back"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:background="@android:color/transparent"
-                    android:paddingHorizontal="10dp"
-                    android:paddingVertical="10dp"
-                    android:src="@drawable/arrow_back"
-                    app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintVertical_bias="0.526" />
             </androidx.constraintlayout.widget.ConstraintLayout>
 
             <TextView
@@ -129,6 +114,7 @@
                     android:background="@drawable/selector_bg_edit_text"
                     android:cursorVisible="false"
                     android:hint="Enter your password"
+                    android:inputType="textPassword"
                     android:paddingHorizontal="10dp"
                     android:paddingVertical="22dp"
                     android:textColor="@color/white"
