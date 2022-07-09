@@ -49,7 +49,7 @@ class SignInFragment : AbstractLoginFragment() {
     private fun addTextChanged() {
         binding.etPasswordField.addTextChangedListener { passwordEditable ->
             passwordEditable?.let { editText ->
-                if (editText.length >= 13)
+                if (editText.length >= 13 || editText.isNotBlank())
                     binding.tvPasswordError.gone()
             }
         }

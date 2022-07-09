@@ -32,15 +32,20 @@ class SignUpFragment : AbstractLoginFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
+    }
+
+    private fun initViews() {
         binding.btnSignUpBack.setOnClickListener { findNavController().popBackStack() }
         requestToEditText()
-        spanSignUpText()
+        spanSignInText()
+        initViews()
         binding.root.setOnClickListener {
             closeKeyboard()
         }
     }
 
-    private fun spanSignUpText() {
+    private fun spanSignInText() {
         val signUpSpanText = SpannableString(getString(R.string.sign_in_text))
         val stringSignUp = getString(R.string.string_sign_in)
         val startIndex = getString(R.string.sign_in_text).indexOf(stringSignUp)

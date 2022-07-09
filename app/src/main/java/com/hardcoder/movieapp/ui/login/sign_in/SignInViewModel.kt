@@ -15,20 +15,21 @@ class SignInViewModel @Inject constructor() : ViewModel() {
     private val _viewEffect = MutableSharedFlow<SignUpViewEffects>()
     val viewEffect = _viewEffect.asSharedFlow()
 
-    fun checkMissingField(mailText: String, passwordText: String) = viewModelScope.launch {
-        if (mailText.isBlank()) {
-            _viewEffect.emit(SignUpViewEffects.ShowEmailErrorMessage("Please fill in the blanks"))
-        } else if (StringUtils.checkEmailValidation(mailText) == Validation.INVALID) {
-            _viewEffect.emit(SignUpViewEffects.ShowEmailErrorMessage("Please enter valid email address"))
-        }
+    fun checkMissingField(mailText: String, passwordText: String) {
+        viewModelScope.launch {
+            if (mailText.isBlank()) {
+                _viewEffect.emit(SignUpViewEffects.ShowEmailErrorMessage("Please fill in the blanks"))
+            } else if (StringUtils.checkEmailValidation(mailText) == Validation.INVALID) {
+                _viewEffect.emit(SignUpViewEffects.ShowEmailErrorMessage("Please enter valid email address"))
+            }
 
-        if (passwordText.isBlank()) {
-            _viewEffect.emit(SignUpViewEffects.ShowPasswordErrorMessage("Please fill in the blanks"))
-        } else if (passwordText.length < 13) {
-            _viewEffect.emit(SignUpViewEffects.ShowPasswordErrorMessage("Password length at least 13"))
+            if (passwordText.isBlank()) {
+                _viewEffect.emit(SignUpViewEffects.ShowPasswordErrorMessage("Please fill in the blanks"))
+            } else if (passwordText.length < 13) {
+                _viewEffect.emit(SignUpViewEffects.ShowPasswordErrorMessage("Password length at least 13"))
+            }
         }
     }
-
 }
 
 sealed class SignUpViewEffects {
