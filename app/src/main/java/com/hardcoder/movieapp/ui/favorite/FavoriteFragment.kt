@@ -4,7 +4,7 @@ import android.os.Bundle
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.hardcoder.movieapp.R
-import com.hardcoder.movieapp.core.base.BaseFragment
+import com.hardcoder.movieapp.ui.base.BaseFragment
 import com.hardcoder.movieapp.databinding.FragmentFavoriteBinding
 import dagger.hilt.android.AndroidEntryPoint
 

@@ -6,26 +6,97 @@ import android.text.SpannableString
 import android.text.TextPaint
 import android.text.method.LinkMovementMethod
 import android.text.style.ClickableSpan
+import android.view.LayoutInflater
 import android.view.View
+import android.view.ViewGroup
 import androidx.core.content.ContextCompat
+import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
+import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
 import com.hardcoder.movieapp.R
-import com.hardcoder.movieapp.core.base.BaseFragment
 import com.hardcoder.movieapp.databinding.FragmentSignInBinding
-import com.hardcoder.movieapp.utils.DeviceUtils
+import com.hardcoder.movieapp.ui.base.AbstractLoginFragment
+import com.hardcoder.movieapp.utils.StringUtils
+import com.hardcoder.movieapp.utils.Validation
+import com.hardcoder.movieapp.utils.gone
+import com.hardcoder.movieapp.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
-class SignInFragment : BaseFragment<FragmentSignInBinding>() {
+class SignInFragment : AbstractLoginFragment() {
 
     private val viewModel by viewModels<SignInViewModel>()
+    private lateinit var binding: FragmentSignInBinding
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        binding = FragmentSignInBinding.inflate(layoutInflater, container, false)
+        return binding.root
+    }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        initViews()
+        initObservers()
+        addTextChanged()
+    }
+
+    private fun addTextChanged() {
+        binding.etPasswordField.addTextChangedListener { passwordEditable ->
+            passwordEditable?.let { editText ->
+                if (editText.length >= 13)
+                    binding.tvPasswordError.gone()
+            }
+        }
+
+        binding.etEmailField.addTextChangedListener { emailEditable ->
+            emailEditable?.let {
+                if (StringUtils.checkEmailValidation(it.toString()) == Validation.VALID) {
+                    binding.tvEmailError.gone()
+                }
+            }
+
+        }
+    }
+
+    private fun initViews() {
         spanSignUpText()
         requestToEditText()
-        closeKeyboard()
+        binding.root.setOnClickListener {
+            closeKeyboard()
+        }
+        checkMissingField()
+    }
+
+    private fun initObservers() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewModel.viewEffect.collect { viewEffect ->
+                when (viewEffect) {
+                    is SignUpViewEffects.ShowEmailErrorMessage -> showEmailError(viewEffect.errorMessage)
+                    is SignUpViewEffects.ShowPasswordErrorMessage -> showPasswordError(viewEffect.errorMessage)
+                }
+            }
+        }
+    }
+
+    private fun showPasswordError(errorMessage: String) {
+        with(binding.tvPasswordError) {
+            text = errorMessage
+            visible()
+        }
+
+    }
+
+    private fun showEmailError(errorMessage: String) {
+        with(binding.tvEmailError) {
+            text = errorMessage
+            visible()
+        }
     }
 
     private fun spanSignUpText() {
@@ -57,14 +128,19 @@ class SignInFragment : BaseFragment<FragmentSignInBinding>() {
 
     private fun requestToEditText() {
         binding.etEmailField.requestFocus()
-        DeviceUtils.openKeyboard(requireActivity(), binding.etEmailField)
+        openKeyboard(binding.etEmailField)
     }
 
-    private fun closeKeyboard() {
-        binding.root.setOnClickListener {
-            DeviceUtils.closeKeyboard(requireActivity())
+    private fun checkMissingField() {
+        binding.btnLogin.setOnClickListener {
+            with(binding) {
+                viewModel.checkMissingField(
+                    etEmailField.text.toString(),
+                    etPasswordField.text.toString()
+                )
+            }
+
         }
     }
 
-    override fun getFragmentView() = R.layout.fragment_sign_in
 }

@@ -3,13 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <data>
-
-        <variable
-            name="isInputValid"
-            type="boolean" />
-    </data>
-
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -25,27 +18,16 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
-                android:id="@+id/cl_btn_login_back"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:background="@drawable/bg_black_with_radius_20dp"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/tv_login_header"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent">
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
             <TextView
                 android:id="@+id/tv_login_header"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="10dp"
                 android:text="@string/login"
+                app:layout_constraintStart_toStartOf="parent"
                 android:textColor="@color/white"
                 android:textSize="25sp"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/cl_btn_login_back"
                 app:layout_constraintTop_toTopOf="parent" />
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -94,6 +76,14 @@
                     android:paddingVertical="22dp"
                     android:textColor="@color/white"
                     android:textColorHint="#787878" />
+
+                <TextView
+                    android:id="@+id/tv_email_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#E91E63"
+                    android:visibility="gone"
+                    tools:text="Error Message" />
             </LinearLayout>
 
             <LinearLayout
@@ -109,6 +99,7 @@
                     android:textColor="@color/white" />
 
                 <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/et_password_field"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@drawable/selector_bg_edit_text"
@@ -119,6 +110,14 @@
                     android:paddingVertical="22dp"
                     android:textColor="@color/white"
                     android:textColorHint="#787878" />
+
+                <TextView
+                    android:id="@+id/tv_password_error"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:textColor="#E91E63"
+                    android:visibility="gone"
+                    tools:text="Error Message" />
             </LinearLayout>
         </LinearLayout>
 
@@ -127,7 +126,6 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="50dp"
-            android:enabled="@{isInputValid ? true : false}"
             android:background="@drawable/bg_login_button_with_radius"
             android:paddingVertical="22dp"
             android:text="@string/login"
@@ -143,12 +141,12 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="20dp"
             android:clickable="true"
+            android:focusable="true"
             android:textAlignment="center"
             android:textColor="@color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_login"
-            tools:text="Don't have an account. Sign Up"
-            android:focusable="true" />
+            tools:text="Don't have an account. Sign Up" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
