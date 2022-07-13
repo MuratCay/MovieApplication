@@ -25,7 +25,7 @@ class SignUpFragment : AbstractLoginFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSignUpBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -39,7 +39,6 @@ class SignUpFragment : AbstractLoginFragment() {
         binding.btnSignUpBack.setOnClickListener { findNavController().popBackStack() }
         requestToEditText()
         spanSignInText()
-        initViews()
         binding.root.setOnClickListener {
             closeKeyboard()
         }
