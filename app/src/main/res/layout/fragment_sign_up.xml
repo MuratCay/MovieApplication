@@ -41,7 +41,6 @@
                     android:layout_gravity="center"
                     android:background="@android:color/transparent"
                     android:padding="8dp"
-                    android:layout_marginStart="6dp"
                     android:src="@drawable/arrow_back"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"
