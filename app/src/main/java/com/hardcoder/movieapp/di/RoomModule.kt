@@ -2,7 +2,7 @@ package com.hardcoder.movieapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.hardcoder.movieapp.data.local.AppDatabase
+import com.hardcoder.movieapp.data.local.db.AppDatabase
 import com.hardcoder.movieapp.utils.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides

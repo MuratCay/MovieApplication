@@ -1,8 +1,9 @@
-package com.hardcoder.movieapp.data.local
+package com.hardcoder.movieapp.data.local.db
 
 import androidx.room.Database
 import androidx.room.RoomDatabase
 import com.hardcoder.movieapp.core.model.PopularList
+import com.hardcoder.movieapp.data.local.dao.MovieDao
 
 @Database(
     entities = [PopularList::class],
