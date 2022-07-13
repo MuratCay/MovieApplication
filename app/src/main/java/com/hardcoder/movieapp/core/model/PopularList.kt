@@ -10,31 +10,31 @@ import java.io.Serializable
 data class PopularList(
     @PrimaryKey(autoGenerate = true)
     @Json(name = "id")
-    val id: Int,
+    val id: Int?,
     @Json(name = "adult")
-    val adult: Boolean,
+    val adult: Boolean?,
     @Json(name = "backdrop_path")
-    val backdropPath: String,
+    val backdropPath: String?,
 //    @Json(name = "genre_ids")
-//    val genreIds: List<Int>,
+//    val genreIds: List<Int>?,
     @Json(name = "original_language")
-    val originalLanguage: String,
+    val originalLanguage: String?,
     @Json(name = "original_title")
-    val originalTitle: String,
+    val originalTitle: String?,
     @Json(name = "overview")
-    val overview: String,
+    val overview: String?,
     @Json(name = "popularity")
-    val popularity: Double,
+    val popularity: Double?,
     @Json(name = "poster_path")
-    val posterPath: String,
+    val posterPath: String?,
     @Json(name = "release_date")
-    val releaseDate: String,
+    val releaseDate: String?,
     @Json(name = "title")
-    val title: String,
+    val title: String?,
     @Json(name = "video")
-    val video: Boolean,
+    val video: Boolean?,
     @Json(name = "vote_average")
-    val voteAverage: Double,
+    val voteAverage: Double?,
     @Json(name = "vote_count")
-    val voteCount: Int
+    val voteCount: Int?
 ): Serializable
