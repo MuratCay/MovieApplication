@@ -1,17 +1,22 @@
 package com.hardcoder.movieapp.core.model
 
-
+import androidx.room.Entity
+import androidx.room.PrimaryKey
+import com.hardcoder.movieapp.utils.Constants
 import com.squareup.moshi.Json
+import java.io.Serializable
 
-data class Result(
+@Entity(tableName = Constants.MOVIE_TABLE_NAME)
+data class PopularList(
+    @PrimaryKey(autoGenerate = true)
+    @Json(name = "id")
+    val id: Int,
     @Json(name = "adult")
     val adult: Boolean,
     @Json(name = "backdrop_path")
     val backdropPath: String,
-    @Json(name = "genre_ids")
-    val genreİds: List<Int>,
-    @Json(name = "id")
-    val id: Int,
+//    @Json(name = "genre_ids")
+//    val genreIds: List<Int>,
     @Json(name = "original_language")
     val originalLanguage: String,
     @Json(name = "original_title")
@@ -32,4 +37,4 @@ data class Result(
     val voteAverage: Double,
     @Json(name = "vote_count")
     val voteCount: Int
-)
+): Serializable

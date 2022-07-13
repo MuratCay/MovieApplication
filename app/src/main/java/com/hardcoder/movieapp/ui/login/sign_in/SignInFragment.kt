@@ -34,7 +34,7 @@ class SignInFragment : AbstractLoginFragment() {
         inflater: LayoutInflater,
         container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View? {
+    ): View {
         binding = FragmentSignInBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -71,6 +71,9 @@ class SignInFragment : AbstractLoginFragment() {
             closeKeyboard()
         }
         checkMissingField()
+        binding.btnLogin.setOnClickListener {
+            findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+        }
     }
 
     private fun initObservers() {
