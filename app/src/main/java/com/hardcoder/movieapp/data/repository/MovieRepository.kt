@@ -5,5 +5,5 @@ import com.hardcoder.movieapp.utils.Resource
 import kotlinx.coroutines.flow.Flow
 
 interface MovieRepository {
-    suspend fun getPopularFromNetwork(): Flow<Resource<PopularResponse>>
+    suspend fun getPopularFromNetwork(): Resource<PopularResponse>
 }

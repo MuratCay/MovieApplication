@@ -8,10 +8,7 @@ import androidx.lifecycle.lifecycleScope
 import com.hardcoder.movieapp.R
 import com.hardcoder.movieapp.ui.base.BaseFragment
 import com.hardcoder.movieapp.databinding.FragmentHomeBinding
-import com.hardcoder.movieapp.utils.Status
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.flow.collect
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class HomeFragment : BaseFragment<FragmentHomeBinding>() {
@@ -21,8 +18,10 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            viewModel.movie.collect {
-                Log.e("TAG", "onViewCreated: ${it.movieList?.results}", )
+            viewModel.movie.collect { viewState ->
+                viewState.movieList?.let {
+                    Log.e("TAG", "onViewCreated: ${it}")
+                }
             }
         }
     }

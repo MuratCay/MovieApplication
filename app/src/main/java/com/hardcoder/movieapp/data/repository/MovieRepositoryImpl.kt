@@ -11,7 +11,6 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(private val apiService: MovieService) :
     MovieRepository {
 
-    override suspend fun getPopularFromNetwork(): Flow<Resource<PopularResponse>> = flow {
-        emit(getResourceByNetworkRequest { apiService.getPopular() })
-    }
+    override suspend fun getPopularFromNetwork() =
+        getResourceByNetworkRequest { apiService.getPopular() }
 }

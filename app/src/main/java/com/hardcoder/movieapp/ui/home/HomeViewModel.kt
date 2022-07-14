@@ -5,11 +5,9 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hardcoder.movieapp.core.model.PopularList
 import com.hardcoder.movieapp.core.model.PopularResponse
 import com.hardcoder.movieapp.data.repository.MovieRepository
 import com.hardcoder.movieapp.utils.Resource
-import com.hardcoder.movieapp.utils.Status
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
@@ -28,19 +26,9 @@ class HomeViewModel @Inject constructor(
     }
 
     private fun getMovie() = viewModelScope.launch {
-        repository.getPopularFromNetwork().onEach { resource ->
-            when(resource.status){
-                Status.LOADING -> {
-
-                }
-                Status.SUCCESS -> {
-                    _movie.value = movie.value.copy(movieList = resource.data)
-                }
-
-                Status.ERROR -> {
-                    Log.e("TAG", resource.message.toString() )
-                }
-            }
+        when (val response = repository.getPopularFromNetwork()) {
+            is Resource.Success -> _movie.value = movie.value.copy(movieList = response.data)
+            else -> {}
         }
 //            .onStart { _movie.value = movie.value.copy(Resource.Loading()) }
 //            .catch { message -> _movie.postValue(Resource.Error(message)) }
