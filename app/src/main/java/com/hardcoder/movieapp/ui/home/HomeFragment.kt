@@ -17,13 +17,8 @@ class HomeFragment : BaseFragment<FragmentHomeBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        viewLifecycleOwner.lifecycleScope.launchWhenResumed {
-            viewModel.movie.collect { viewState ->
-                viewState.movieList?.let {
-                    Log.e("TAG", "onViewCreated: ${it}")
-                }
-            }
-        }
+
+
     }
 
     override fun getFragmentView() = R.layout.fragment_home
