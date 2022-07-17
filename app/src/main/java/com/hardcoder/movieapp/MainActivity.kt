@@ -1,16 +1,13 @@
 package com.hardcoder.movieapp
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import androidx.core.view.isGone
+import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isVisible
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.NavigationUI.setupWithNavController
 import androidx.navigation.ui.navigateUp
-import androidx.recyclerview.widget.RecyclerView
-import com.google.android.material.bottomnavigation.BottomNavigationView
 import com.hardcoder.movieapp.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
@@ -46,35 +43,9 @@ class MainActivity : AppCompatActivity() {
 
         setupWithNavController(binding.bottomNavigationView, navController)
 
-        navController.addOnDestinationChangedListener { _, destination, _ ->
-            if (appBarConfiguration.topLevelDestinations.contains(destination.id)) {
-                binding.bottomNavigationView.isVisible = true
-            } else {
-                binding.bottomNavigationView.isGone = true
-            }
+        navController.addOnDestinationChangedListener { _, _, args ->
+            binding.bottomNavigationView.isVisible = args?.getBoolean("hideBottomNav") != true
         }
-    }
-
-    fun hideBottomNavigation(recyclerView: RecyclerView) {
-        recyclerView.addOnScrollListener(object : RecyclerView.OnScrollListener() {
-            override fun onScrolled(recyclerView: RecyclerView, dx: Int, dy: Int) {
-                if (dy > 0 && binding.bottomNavigationView.isShown) {
-                    slideDown(binding.bottomNavigationView)
-                } else if (dy < 0) {
-                    slideUp(binding.bottomNavigationView)
-                }
-            }
-        })
-    }
-
-    private fun slideUp(child: BottomNavigationView) {
-        child.clearAnimation()
-        child.animate().translationY(0f).duration = 150
-    }
-
-    private fun slideDown(child: BottomNavigationView) {
-        child.clearAnimation()
-        child.animate().translationY(binding.bottomNavigationView.height.toFloat()).duration = 220
     }
 
     override fun onSupportNavigateUp(): Boolean {

@@ -9,11 +9,15 @@ import android.text.style.ClickableSpan
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.tasks.OnCompleteListener
+import com.google.firebase.auth.AuthResult
+import com.google.firebase.auth.FirebaseAuth
 import com.hardcoder.movieapp.R
 import com.hardcoder.movieapp.databinding.FragmentSignInBinding
 import com.hardcoder.movieapp.ui.base.AbstractLoginFragment
@@ -27,6 +31,8 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class SignInFragment : AbstractLoginFragment() {
 
+    private lateinit var mAuthStateListener: FirebaseAuth.AuthStateListener
+    private lateinit var auth: FirebaseAuth
     private val viewModel by viewModels<SignInViewModel>()
     private lateinit var binding: FragmentSignInBinding
 
@@ -35,6 +41,7 @@ class SignInFragment : AbstractLoginFragment() {
         container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
+        auth = FirebaseAuth.getInstance()
         binding = FragmentSignInBinding.inflate(layoutInflater, container, false)
         return binding.root
     }
@@ -42,8 +49,9 @@ class SignInFragment : AbstractLoginFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         initViews()
-        initObservers()
         addTextChanged()
+        login()
+        initAuthStateListener()
     }
 
     private fun addTextChanged() {
@@ -70,38 +78,7 @@ class SignInFragment : AbstractLoginFragment() {
         binding.root.setOnClickListener {
             closeKeyboard()
         }
-        checkMissingField()
-        binding.btnLogin.setOnClickListener {
-            findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
-        }
     }
-
-    private fun initObservers() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewModel.viewEffect.collect { viewEffect ->
-                when (viewEffect) {
-                    is SignUpViewEffects.ShowEmailErrorMessage -> showEmailError(viewEffect.errorMessage)
-                    is SignUpViewEffects.ShowPasswordErrorMessage -> showPasswordError(viewEffect.errorMessage)
-                }
-            }
-        }
-    }
-
-    private fun showPasswordError(errorMessage: String) {
-        with(binding.tvPasswordError) {
-            text = errorMessage
-            visible()
-        }
-
-    }
-
-    private fun showEmailError(errorMessage: String) {
-        with(binding.tvEmailError) {
-            text = errorMessage
-            visible()
-        }
-    }
-
     private fun spanSignUpText() {
         val signUpSpanText = SpannableString(getString(R.string.sign_up_text))
         val stringSignUp = getString(R.string.string_sign_up)
@@ -134,16 +111,65 @@ class SignInFragment : AbstractLoginFragment() {
         openKeyboard(binding.etEmailField)
     }
 
-    private fun checkMissingField() {
-        binding.btnLogin.setOnClickListener {
-            with(binding) {
-                viewModel.checkMissingField(
-                    etEmailField.text.toString(),
-                    etPasswordField.text.toString()
-                )
+    private fun login() {
+        with(binding) {
+            btnLogin.setOnClickListener {
+                if (etEmailField.text.isNullOrBlank().not() && etPasswordField.text.isNullOrBlank()
+                        .not()
+                ) {
+                    auth
+                        .signInWithEmailAndPassword(
+                            etEmailField.text.toString(),
+                            etPasswordField.text.toString()
+                        )
+                        .addOnCompleteListener { p0 ->
+                            if (p0.isSuccessful) {
+                                FirebaseAuth.getInstance().signOut()
+                                findNavController().navigate(R.id.action_signInFragment_to_homeFragment)
+                            } else {
+                                Toast.makeText(
+                                    requireContext(),
+                                    "Oops.. Error when try to login to account: " + p0.exception?.message,
+                                    Toast.LENGTH_SHORT
+                                ).show()
+                            }
+                        }
+                } else {
+                    Toast.makeText(requireContext(), "Please fill the blanks", Toast.LENGTH_SHORT)
+                        .show()
+                }
             }
-
         }
     }
 
+    private fun initAuthStateListener() {
+        mAuthStateListener = FirebaseAuth.AuthStateListener { p0 ->
+            val user = p0.currentUser
+            user?.let { currentUser ->
+                if (currentUser.isEmailVerified) {
+                    Toast.makeText(
+                        requireContext(),
+                        "The email address confirmed. You will redirect.",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                } else {
+                    Toast.makeText(
+                        requireContext(),
+                        "Oops.. Please confirm the mail message",
+                        Toast.LENGTH_SHORT
+                    ).show()
+                }
+            }
+        }
+    }
+
+    override fun onStart() {
+        super.onStart()
+        auth.addAuthStateListener(mAuthStateListener)
+    }
+
+    override fun onStop() {
+        super.onStop()
+        auth.removeAuthStateListener { mAuthStateListener }
+    }
 }
