@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "529866580720",
+    "project_id": "movieapp-b7e72",
+    "storage_bucket": "movieapp-b7e72.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:529866580720:android:66d4d153bc7b6dbcae5835",
+        "android_client_info": {
+          "package_name": "com.hardcoder.movieapp"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "529866580720-i87kh3q54ev9esisosgvfbb87i5iakau.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCLEnkOAIP6pLhALsJ0_V4tNTYxU1WWYtQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "529866580720-i87kh3q54ev9esisosgvfbb87i5iakau.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
