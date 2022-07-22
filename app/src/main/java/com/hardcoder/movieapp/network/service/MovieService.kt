@@ -1,4 +1,4 @@
-package com.hardcoder.movieapp.data.service
+package com.hardcoder.movieapp.network.service
 
 import com.hardcoder.movieapp.core.model.PopularResponse
 import com.hardcoder.movieapp.core.model.UpcomingResponse

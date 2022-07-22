@@ -13,10 +13,7 @@ import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.core.widget.addTextChangedListener
 import androidx.fragment.app.viewModels
-import androidx.lifecycle.lifecycleScope
 import androidx.navigation.fragment.findNavController
-import com.google.android.gms.tasks.OnCompleteListener
-import com.google.firebase.auth.AuthResult
 import com.google.firebase.auth.FirebaseAuth
 import com.hardcoder.movieapp.R
 import com.hardcoder.movieapp.databinding.FragmentSignInBinding
@@ -24,9 +21,7 @@ import com.hardcoder.movieapp.ui.base.AbstractLoginFragment
 import com.hardcoder.movieapp.utils.StringUtils
 import com.hardcoder.movieapp.utils.Validation
 import com.hardcoder.movieapp.utils.gone
-import com.hardcoder.movieapp.utils.visible
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class SignInFragment : AbstractLoginFragment() {
@@ -79,6 +74,7 @@ class SignInFragment : AbstractLoginFragment() {
             closeKeyboard()
         }
     }
+
     private fun spanSignUpText() {
         val signUpSpanText = SpannableString(getString(R.string.sign_up_text))
         val stringSignUp = getString(R.string.string_sign_up)

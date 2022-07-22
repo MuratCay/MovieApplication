@@ -27,6 +27,5 @@ suspend fun <T> getResourceByNetworkRequest(request: suspend () -> Response<T>):
         e.printStackTrace()
         return Resource.Error(e)
     }
-
     return Resource.Loading()
 }

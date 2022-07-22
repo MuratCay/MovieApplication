@@ -1,8 +1,9 @@
 package com.hardcoder.movieapp.di
 
+import com.hardcoder.movieapp.data.datasource.movie.local.MovieLocalDataSource
+import com.hardcoder.movieapp.data.datasource.movie.remote.MovieRemoteDataSource
 import com.hardcoder.movieapp.data.repository.MovieRepository
 import com.hardcoder.movieapp.data.repository.MovieRepositoryImpl
-import com.hardcoder.movieapp.data.service.MovieService
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -15,7 +16,10 @@ object RepositoryModule {
 
     @Provides
     @Singleton
-    fun provideMovieRepository(apiService: MovieService): MovieRepository {
-        return MovieRepositoryImpl(apiService = apiService)
+    fun provideMovieRepository(
+        movieRemoteDataSource: MovieRemoteDataSource,
+        movieLocalDataSource: MovieLocalDataSource
+    ): MovieRepository {
+        return MovieRepositoryImpl(movieRemoteDataSource, movieLocalDataSource)
     }
 }
