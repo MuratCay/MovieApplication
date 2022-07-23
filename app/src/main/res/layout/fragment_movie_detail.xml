@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:argType="http://schemas.android.com/tools"
+    xmlns:tools="http://schemas.android.com/tools">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginHorizontal="20dp"
+        android:focusable="true"
+        android:keepScreenOn="true"
+        tools:context=".ui.home.MovieDetailFragment">
+
+        <include
+            android:id="@+id/layout_header"
+            layout="@layout/layout_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <com.google.android.exoplayer2.ui.StyledPlayerView
+            android:id="@+id/spv_player_view"
+            android:layout_width="0dp"
+            android:layout_height="200dp"
+            android:layout_marginTop="40dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/layout_header"
+            argType:fastforward_increment="15000"
+            argType:resize_mode="fixed_width"
+            argType:rewind_increment="15000"
+            argType:show_buffering="when_playing"
+            argType:show_fastforward_button="true"
+            argType:show_next_button="false"
+            argType:show_previous_button="false"
+            argType:show_rewind_button="true"
+            argType:show_subtitle_button="true"
+            argType:use_artwork="true"
+            argType:use_controller="true"
+            argType:use_sensor_rotation="true" />
+
+        <androidx.appcompat.widget.AppCompatRatingBar
+            android:id="@+id/rb_movie_rating"
+            style="?android:attr/ratingBarStyleIndicator"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="30dp"
+            android:numStars="5"
+            android:progressTint="#FFCC01"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/spv_player_view" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_movie_description_header"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="140dp"
+            android:fontFamily="@font/opensans_bold"
+            android:text="Description"
+            android:textColor="@color/black"
+            app:layout_constraintTop_toBottomOf="@+id/rb_movie_rating" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:id="@+id/tv_movie_description"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:fontFamily="@font/opensans_regular"
+            android:textColor="@color/dark_jungle_black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_movie_description_header" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
