@@ -91,6 +91,9 @@ dependencies {
     //lottie
     implementation 'com.airbnb.android:lottie:5.0.3'
 
+    // Firebase
+    implementation 'com.google.firebase:firebase-auth:19.2.0'
+    implementation 'com.google.firebase:firebase-auth-ktx:21.0.1'
     //exoplayer
     implementation 'com.google.android.exoplayer:exoplayer:2.18.1'
 

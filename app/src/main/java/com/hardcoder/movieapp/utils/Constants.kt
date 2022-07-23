@@ -9,4 +9,6 @@ object Constants {
     const val CONNECT_TIMEOUT = 20L
     const val READ_TIMEOUT = 60L
     const val WRITE_TIMEOUT = 120L
+    const val VIDEO_URL = "https://bitdash-a.akamaihd.net/content/sintel/hls/playlist.m3u8"
+    const val IMAGE_URL = "https://image.tmdb.org/t/p/w500"
 }

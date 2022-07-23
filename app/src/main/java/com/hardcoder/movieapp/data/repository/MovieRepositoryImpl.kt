@@ -7,7 +7,8 @@ import javax.inject.Inject
 class MovieRepositoryImpl @Inject constructor(
     private val movieRemoteDataSource: MovieRemoteDataSource,
     movieLocalDataSource: MovieLocalDataSource
-) :
-    MovieRepository {
+) : MovieRepository {
+
     override suspend fun getPopularFromNetwork() = movieRemoteDataSource.getPopularFromNetwork()
+    override suspend fun getUpcomingFromNetwork() = movieRemoteDataSource.getUpcomingFromNetwork()
 }

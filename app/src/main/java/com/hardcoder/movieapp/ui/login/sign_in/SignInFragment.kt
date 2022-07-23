@@ -63,7 +63,6 @@ class SignInFragment : AbstractLoginFragment() {
                     binding.tvEmailError.gone()
                 }
             }
-
         }
     }
 

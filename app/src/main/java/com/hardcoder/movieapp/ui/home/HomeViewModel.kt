@@ -1,15 +1,13 @@
 package com.hardcoder.movieapp.ui.home
 
-import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hardcoder.movieapp.core.model.PopularResponse
+import com.hardcoder.movieapp.core.model.UpcomingResponse
 import com.hardcoder.movieapp.data.repository.MovieRepository
 import com.hardcoder.movieapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.*
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -18,26 +16,28 @@ class HomeViewModel @Inject constructor(
     private val repository: MovieRepository
 ) : ViewModel() {
 
-    private val _movie = MutableStateFlow(MovieViewState())
-    val movie = _movie.asStateFlow()
+    private val _upcomingViewState = MutableStateFlow(MovieViewState())
+    val upcomingViewState = _upcomingViewState.asStateFlow()
 
     init {
         getMovie()
     }
 
     private fun getMovie() = viewModelScope.launch {
-        when (val response = repository.getPopularFromNetwork()) {
-            is Resource.Success -> _movie.value = movie.value.copy(movieList = response.data)
-            else -> {}
+        when (val response = repository.getUpcomingFromNetwork()) {
+            is Resource.Loading -> _upcomingViewState.value =
+                upcomingViewState.value.copy(isLoading = true)
+            is Resource.Success -> _upcomingViewState.value =
+                upcomingViewState.value.copy(upcomingResponse = response.data)
+            is Resource.Error -> _upcomingViewState.value =
+                upcomingViewState.value.copy(error = response.message.toString())
         }
-//            .onStart { _movie.value = movie.value.copy(Resource.Loading()) }
-//            .catch { message -> _movie.postValue(Resource.Error(message)) }
-//            .collect { _movie.postValue(it) }
     }
 }
 
 data class MovieViewState(
     val isLoading: Boolean? = null,
-    val movieList: PopularResponse? = null,
+    val upcomingResponse: UpcomingResponse? = null,
+    // val popularResponse: PopularResponse? = null,
     val error: String? = null
 )

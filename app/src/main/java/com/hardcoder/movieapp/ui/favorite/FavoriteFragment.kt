@@ -1,6 +1,7 @@
 package com.hardcoder.movieapp.ui.favorite
 
 import android.os.Bundle
+import android.util.Log
 import android.view.View
 import androidx.fragment.app.viewModels
 import com.hardcoder.movieapp.R
@@ -15,6 +16,7 @@ class FavoriteFragment : BaseFragment<FragmentFavoriteBinding>() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+        Log.e("TAG", "onViewCreated: ", )
     }
 
     override fun getFragmentView() = R.layout.fragment_favorite
