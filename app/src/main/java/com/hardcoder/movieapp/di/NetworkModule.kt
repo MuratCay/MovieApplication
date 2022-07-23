@@ -2,7 +2,7 @@ package com.hardcoder.movieapp.di
 
 import android.content.Context
 import com.hardcoder.movieapp.BuildConfig
-import com.hardcoder.movieapp.data.service.MovieService
+import com.hardcoder.movieapp.network.service.MovieService
 import com.hardcoder.movieapp.utils.Constants.BASE_URL
 import com.hardcoder.movieapp.utils.Constants.CONNECT_TIMEOUT
 import com.hardcoder.movieapp.utils.Constants.READ_TIMEOUT

@@ -2,7 +2,8 @@ package com.hardcoder.movieapp.di
 
 import android.content.Context
 import androidx.room.Room
-import com.hardcoder.movieapp.data.local.db.AppDatabase
+import com.hardcoder.movieapp.database.dao.MovieDao
+import com.hardcoder.movieapp.database.db.AppDatabase
 import com.hardcoder.movieapp.utils.Constants.DATABASE_NAME
 import dagger.Module
 import dagger.Provides
@@ -19,4 +20,8 @@ object RoomModule {
     @Singleton
     fun movieDatabase(@ApplicationContext context: Context): AppDatabase =
         Room.databaseBuilder(context, AppDatabase::class.java, DATABASE_NAME).build()
+
+    @Provides
+    @Singleton
+    fun provideDao(db: AppDatabase): MovieDao = db.movieDao()
 }

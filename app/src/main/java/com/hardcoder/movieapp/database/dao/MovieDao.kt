@@ -1,4 +1,4 @@
-package com.hardcoder.movieapp.data.local.dao
+package com.hardcoder.movieapp.database.dao
 
 import androidx.room.*
 import com.hardcoder.movieapp.core.model.PopularList
