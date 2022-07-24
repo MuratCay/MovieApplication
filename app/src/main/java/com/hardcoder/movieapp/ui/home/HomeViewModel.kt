@@ -2,7 +2,7 @@ package com.hardcoder.movieapp.ui.home
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.hardcoder.movieapp.core.model.UpcomingResponse
+import com.hardcoder.movieapp.core.model.MovieResponse
 import com.hardcoder.movieapp.data.repository.MovieRepository
 import com.hardcoder.movieapp.utils.Resource
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -28,7 +28,7 @@ class HomeViewModel @Inject constructor(
             is Resource.Loading -> _upcomingViewState.value =
                 upcomingViewState.value.copy(isLoading = true)
             is Resource.Success -> _upcomingViewState.value =
-                upcomingViewState.value.copy(upcomingResponse = response.data)
+                upcomingViewState.value.copy(movieResponse = response.data)
             is Resource.Error -> _upcomingViewState.value =
                 upcomingViewState.value.copy(error = response.message.toString())
         }
@@ -37,7 +37,6 @@ class HomeViewModel @Inject constructor(
 
 data class MovieViewState(
     val isLoading: Boolean? = null,
-    val upcomingResponse: UpcomingResponse? = null,
-    // val popularResponse: PopularResponse? = null,
+    val movieResponse: MovieResponse? = null,
     val error: String? = null
 )

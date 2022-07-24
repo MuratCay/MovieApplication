@@ -2,7 +2,7 @@ package com.hardcoder.movieapp.core.model
 
 import com.squareup.moshi.Json
 
-data class ResultX(
+data class AllMovieFeaturesResponse(
     @Json(name = "adult")
     val adult: Boolean,
     @Json(name = "backdrop_path")

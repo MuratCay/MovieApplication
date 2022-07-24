@@ -1,7 +1,7 @@
 package com.hardcoder.movieapp.network.service
 
 import com.hardcoder.movieapp.core.model.PopularResponse
-import com.hardcoder.movieapp.core.model.UpcomingResponse
+import com.hardcoder.movieapp.core.model.MovieResponse
 import com.hardcoder.movieapp.utils.Constants.API_KEY
 import com.hardcoder.movieapp.utils.Constants.LANGUAGE
 import retrofit2.Response
@@ -28,6 +28,6 @@ interface MovieService {
         language: String = LANGUAGE,
         @Query("page")
         page: Int = 1
-    ): Response<UpcomingResponse>
+    ): Response<MovieResponse>
 
 }

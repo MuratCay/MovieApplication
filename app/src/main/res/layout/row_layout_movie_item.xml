@@ -30,7 +30,7 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:textStyle="bold"
-            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/iv_movie"
             app:layout_constraintStart_toStartOf="@id/iv_movie"
             app:layout_constraintTop_toBottomOf="@id/iv_movie"
             tools:text="Fast and Furious" />
@@ -47,20 +47,20 @@
 
         <androidx.appcompat.widget.AppCompatRatingBar
             android:id="@+id/rating_bar"
-            style="@style/Widget.AppCompat.RatingBar.Indicator"
+            style="@style/Widget.AppCompat.RatingBar.Small"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="8dp"
-            android:isIndicator="true"
-            android:numStars="5"
-            android:scaleX=".8"
-            android:scaleY=".8"
-            android:stepSize="0.5"
+            android:minWidth="0dp"
+            android:isIndicator="false"
+            android:minHeight="0dp"
+            android:numStars="8"
+            android:stepSize="0.1"
             android:theme="@style/MyRatingBar"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="@id/iv_movie"
+            app:layout_constraintStart_toStartOf="@id/iv_movie"
             app:layout_constraintTop_toBottomOf="@id/tv_movie_name"
-            tools:rating="9.5" />
+            tools:rating="4" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>
