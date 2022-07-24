@@ -12,7 +12,7 @@ class MovieRemoteDataSourceImpl @Inject constructor(private val apiService: Movi
     override suspend fun getPopularFromNetwork(): Resource<PopularResponse> =
         getResourceByNetworkRequest { apiService.getPopular() }
 
-    override suspend fun getUpcomingFromNetwork(): Resource<UpcomingResponse> {
-        return getResourceByNetworkRequest { apiService.getUpcoming() }
-    }
+    override suspend fun getUpcomingFromNetwork(): Resource<UpcomingResponse> =
+        getResourceByNetworkRequest { apiService.getUpcoming() }
+
 }
